@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2072498840ced4c948acfc9dce99b08a, type: 3}
+  m_Name: Carrot
+  m_EditorClassIdentifier: 
+  plantName: Carrot
+  plantIcon: {fileID: 21300000, guid: 75fbda43670c1413db13d646090de6a3, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 37171f325ed9d421db6c0a4e9d518645, type: 3}
+  - {fileID: 21300000, guid: bf5333863889d47efaef71e9a738b8e9, type: 3}
+  - {fileID: 21300000, guid: 525d224eaeac9472dbed590f58c6a499, type: 3}
+  growTime: 1
+  purchasePrice: 5
+  sellingPrice: 10
+  settings:
+  - transformationType: 0
+    use: 1
+    plantData: {fileID: 11400000, guid: d6cd099b495474deebed84e67b9439d2, type: 2}
+    transformationTime: 10
+  - transformationType: 1
+    use: 0
+    plantData: {fileID: 0}
+    transformationTime: 0
+  - transformationType: 2
+    use: 0
+    plantData: {fileID: 0}
+    transformationTime: 0
+  canBePlanted: 1

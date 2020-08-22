@@ -18,6 +18,10 @@ namespace Manager
     {
         #region General functions
 
+        public bool IsShownWindow { get; private set; }
+        private readonly PlantDataEvent _plantDataEvent = new PlantDataEvent();
+        public GameObject rectButtonPrefab;
+        
         private void RefreshContent(Component content, UnityAction<PlantData> unityAction, GameObject button)
         {
             content.transform.DestroyAllChildrenObjects();
@@ -33,6 +37,7 @@ namespace Manager
                 //buttonStructure.GetComponent<Button>().onClick.AddListener(() => StoragePlantClick(plant.Key));
                 buttonStructure.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    SoundManager.Instance.PlayClick();
                     _plantDataEvent.RemoveAllListeners();
                     _plantDataEvent.AddListener(unityAction);
                     _plantDataEvent.Invoke(plant.Key);
@@ -42,8 +47,12 @@ namespace Manager
 
         #endregion
 
-        #region Seeds Window
+        #region Seeds
 
+        [Header("Seeds window")] public GameObject seedsPanel;
+
+        public RectTransform seedsContent;
+        
         public void SetVisibleSeedsWindow(bool show)
         {
             IsShownWindow = show;
@@ -70,10 +79,17 @@ namespace Manager
 
         #endregion
 
-        #region Cash Window
+        #region Cash
 
+        [Header("Cash window")] public GameObject cashPanel;
+
+        public Text cashValue;
+        public GameObject titlePrefab;
+        public RectTransform cashContent;
+        
         public void SetVisibleCashWindow(bool show)
         {
+            SoundManager.Instance.PlayClick();
             IsShownWindow = show;
             cashPanel.SetActive(show);
             if (!show) return;
@@ -88,10 +104,42 @@ namespace Manager
 
         #endregion
 
-        #region Weather Window
+        #region Sale
 
+        [Header("Sale window")] public GameObject salePanel;
+
+        public RectTransform saleContent;
+        
+        public void SetVisibleSaleWindow(bool show)
+        {
+            SoundManager.Instance.PlayClick();
+            IsShownWindow = show;
+            salePanel.SetActive(show);
+
+            if (!show) return;
+
+            RefreshContent(saleContent, SalePlant, rectButtonPrefab);
+        }
+
+        private void SalePlant(PlantData plantData)
+        {
+            if (!StorageManager.Instance.RemovePlant(plantData))
+                return;
+            MoneyManager.Instance.AddMoney(plantData.SellingPrice, plantData.PlantName);
+            RefreshContent(saleContent, SalePlant, rectButtonPrefab);
+        }
+
+        #endregion
+
+        #region Weather
+
+        [Header("Weather window")] public GameObject weatherPanel;
+
+        public Text weatherText;
+        
         public void SetVisibleWeatherWindow(bool show)
         {
+            SoundManager.Instance.PlayClick();
             weatherPanel.SetActive(show);
 
             if (!show) return;
@@ -102,78 +150,15 @@ namespace Manager
 
         #endregion
 
-        #region General Variables
-
-        public bool IsShownWindow { get; private set; }
-        private readonly PlantDataEvent _plantDataEvent = new PlantDataEvent();
-        public GameObject rectButtonPrefab;
-
-        #endregion
-
-        #region Information Window Variables
+        #region Information
 
         [Header("Information window")] public GameObject informationPanel;
 
         public Text informationValues;
-
-        #endregion
-
-        #region Seeds Window Variables
-
-        [Header("Seeds window")] public GameObject seedsPanel;
-
-        public RectTransform seedsContent;
-
-        #endregion
-
-        #region Cash Window Variables
-
-        [Header("Cash window")] public GameObject cashPanel;
-
-        public Text cashValue;
-        public GameObject titlePrefab;
-        public RectTransform cashContent;
-
-        #endregion
-
-        #region Storage Window Variables
-
-        [Header("Storage window")] public GameObject storagePanel;
-
-        public RectTransform storageContent;
-        public GameObject storageButtonPrefab;
-        public List<TransformationStruct> transformations;
-
-        #endregion
-
-        #region Upgrade Window Variables
-
-        [Header("Upgrade window")] public GameObject upgradePanel;
-
-        public RectTransform upgradeContent;
-
-        #endregion
-
-        #region Sale Window Variables
-
-        [Header("Sale window")] public GameObject salePanel;
-
-        public RectTransform saleContent;
-
-        #endregion
-
-        #region Weather Window Variables
-
-        [Header("Weather window")] public GameObject weatherPanel;
-
-        public Text weatherText;
-
-        #endregion
-
-        #region Information Window
-
+        
         public void OpenInformationWindow(Ground ground)
         {
+            SoundManager.Instance.PlayClick();
             IsShownWindow = true;
             informationValues.text = $"{ground.ConditionType.ToString()} \n" +
                                      $"{ground.PlantData?.PlantName ?? "none"} \n" +
@@ -185,16 +170,24 @@ namespace Manager
 
         public void CloseInformationWindow()
         {
+            SoundManager.Instance.PlayClick();
             IsShownWindow = false;
             informationPanel.SetActive(false);
         }
 
         #endregion
 
-        #region Storage Window
+        #region Storage
 
+        [Header("Storage window")] public GameObject storagePanel;
+
+        public RectTransform storageContent;
+        public GameObject storageButtonPrefab;
+        public List<TransformationStruct> transformations;
+        
         public void SetVisibleStorageWindow(bool show)
         {
+            SoundManager.Instance.PlayClick();
             IsShownWindow = show;
             storagePanel.SetActive(show);
 
@@ -210,7 +203,11 @@ namespace Manager
                 if (!plantData.CheckCanBeTransformation(transformation.transformationType)) return;
                 var button = transformation.plusImage.GetComponent<Button>();
                 button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(() => { StoragePlusClick(plantData, transformation); });
+                button.onClick.AddListener(() =>
+                {
+                    StoragePlusClick(plantData, transformation);
+                    SoundManager.Instance.PlayClick();
+                });
                 transformation.plusImage.enabled = true;
             });
         }
@@ -238,6 +235,7 @@ namespace Manager
             transformationStruct.outputImage.enabled = true;
             transformationStruct.outputImage.GetComponent<Button>().onClick.AddListener(() =>
             {
+                SoundManager.Instance.PlayClick();
                 StorageManager.Instance.AddPlant(juicer);
                 RefreshContent(storageContent, StoragePlantClick, storageButtonPrefab);
                 transformationStruct.outputImage.sprite = null;
@@ -254,10 +252,15 @@ namespace Manager
 
         #endregion
 
-        #region Upgrade Window
+        #region Upgrade
 
+        [Header("Upgrade window")] public GameObject upgradePanel;
+
+        public RectTransform upgradeContent;
+        
         public void SetVisibleUpgradeWindow(bool show)
         {
+            SoundManager.Instance.PlayClick();
             IsShownWindow = show;
             upgradePanel.SetActive(show);
 
@@ -278,39 +281,11 @@ namespace Manager
                                             $"{upgrade.UpgradeCostAsString}";
                 button.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    SoundManager.Instance.PlayClick();
                     upgrade.UpgradeThis();
                     RefreshUpgradeContent();
                 });
             });
-        }
-
-        #endregion
-
-        #region Sale Window
-
-        public void SetVisibleSaleWindow(bool show)
-        {
-            IsShownWindow = show;
-            salePanel.SetActive(show);
-
-            if (!show) return;
-
-            RefreshContent(saleContent, SalePlant, rectButtonPrefab);
-        }
-
-        private void SalePlant(PlantData plantData)
-        {
-            if (!StorageManager.Instance.RemovePlant(plantData))
-                return;
-            MoneyManager.Instance.AddMoney(plantData.SellingPrice, plantData.PlantName);
-            RefreshContent(saleContent, SalePlant, rectButtonPrefab);
-        }
-
-        private void SaleAll()
-        {
-            foreach (var plant in StorageManager.Instance.Plants.Keys)
-            {
-            }
         }
 
         #endregion

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_Farming-simulator.-1690145579.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Classes" t="Include">
+            <e p="Upgrade.cs" t="Include" />
+          </e>
+          <e p="Data" t="Include">
+            <e p="GroundData.cs" t="Include" />
+            <e p="PlantData.cs" t="Include" />
+          </e>
+          <e p="Editor" t="Include">
+            <e p="PlantData.cs" t="Include" />
+          </e>
+          <e p="Extension" t="Include">
+            <e p="ColorExtension.cs" t="Include" />
+            <e p="Enums.cs" t="Include" />
+            <e p="Singleton.cs" t="Include" />
+            <e p="Structs.cs" t="Include" />
+            <e p="TransformExtension.cs" t="Include" />
+          </e>
+          <e p="Manager" t="Include">
+            <e p="GroundManager.cs" t="Include" />
+            <e p="MoneyManager.cs" t="Include" />
+            <e p="NotificationManager.cs" t="Include" />
+            <e p="SeedManager.cs" t="Include" />
+            <e p="SoundManager.cs" t="Include" />
+            <e p="StorageManager.cs" t="Include" />
+            <e p="ToolManager.cs" t="Include" />
+            <e p="TransformationManager.cs" t="Include" />
+            <e p="UpgradeManager.cs" t="Include" />
+            <e p="WeatherManager.cs" t="Include" />
+            <e p="WindowManager.cs" t="Include" />
+          </e>
+          <e p="Object" t="Include">
+            <e p="Ground.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="ButtonStructure.cs" t="Include" />
+            <e p="ToolButton.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Farming-simulator.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

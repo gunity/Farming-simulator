@@ -41,6 +41,10 @@ namespace Object
         {
             if (WindowManager.Instance.IsShownWindow)
                 return;
+            //bad code optimization (
+            if(ToolManager.Instance.ToolType != EToolType.Seed)
+                SoundManager.Instance.PlayClick();
+            
             switch (ToolManager.Instance.ToolType)
             {
                 case EToolType.Select:
@@ -121,11 +125,16 @@ namespace Object
 
         private void Seed()
         {
-            if (PlantData != null) return;
+            if (PlantData != null)
+            {
+                SoundManager.Instance.PlayClick();
+                return;
+            }
 
             if (!MoneyManager.Instance.SubMoney((PlantData = ToolManager.Instance.PlantData).PurchasePrice,
                 PlantData.PlantName))
             {
+                SoundManager.Instance.PlayClick();
                 PlantData = null;
                 return;
             }
@@ -138,6 +147,8 @@ namespace Object
             plant.transform.SetParent(transform);
             plant.transform.localPosition = Vector3.zero;
             StartCoroutine(nameof(ToGrow));
+            
+            SoundManager.Instance.PlayPlant();
         }
 
         private void Collect()

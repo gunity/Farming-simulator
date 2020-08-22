@@ -16,11 +16,13 @@ namespace Manager
         public void SetToolType(EToolType toolType)
         {
             ToolType = toolType;
+            SoundManager.Instance.PlayClick();
         }
 
-        public void SetPlantType(PlantData plantDataData)
+        public void SetPlantType(PlantData plantData)
         {
-            PlantData = plantDataData;
+            PlantData = plantData;
+            SoundManager.Instance.PlayClick();
         }
     }
 }
